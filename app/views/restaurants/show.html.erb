@@ -23,8 +23,9 @@
 <!-- NEW -->
 <ul class="list-group">
   <% @restaurant.reviews.each do |review| %>
-    <li class="list-group-item"><%= review.content %></li>
-    <li class="list-group-item"><%= link_to "Remove", review_path(review), method: :delete, data: { confirm: "Are you sure?" } %></li>
+    <li class="list-group-item"><%= review.content %> (<%= review.rating %> stars)</li>
+    <li class="list-group-item"><%= link_to "Remove", review_path(review.id), method: :delete, data: { confirm: "Are you sure?" } %></li>
+    <%# review_path(review) also ok %>
   <% end %>
 </ul>
 
