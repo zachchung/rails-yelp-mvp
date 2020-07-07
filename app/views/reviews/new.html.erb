@@ -1,6 +1,6 @@
 <%# Helper                              HTTP request %>
-<%# `form_for(@review)`                 POST **`reviews_path`** %>
-<%# `form_for([@restaurant, @review])`  POST **`restaurant_reviews_path`** %>
+<%# `form_for(@review)`                 POST to `reviews_path`**             (/reviews) %>
+<%# `form_for([@restaurant, @review])`  POST to `restaurant_reviews_path`**  (/restaurants/:restaurant_id/reviews) %>
 
 <%= simple_form_for [ @restaurant, @review ] do |f| %>
   <%= f.input :content %>

@@ -1,33 +1,19 @@
-<p id="notice"><%= notice %></p>
+<h1>All restaurants</h1>
 
-<h1>Restaurants</h1>
+<% @restaurants.each do |restaurant| %>
+  <div class="card p-3 mb-2">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Phone</th>
-      <th>Category</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <div class="d-flex justify-content-between"> <%# Name & icons %>
+      <h4><%= link_to restaurant.name, restaurant_path(restaurant) %></h4>
+      <div> <%# Edit & delete icon %>
+        <%= link_to edit_restaurant_path(restaurant.id) do %> <i class="fas fa-pencil-alt m-2"></i> <% end %>
+        <%= link_to restaurant_path(restaurant.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+          <i class="far fa-trash-alt"></i>
+        <% end %>
+      </div>
+    </div>
 
-  <tbody>
-    <% @restaurants.each do |restaurant| %>
-      <tr>
-        <td><%= restaurant.name %></td>
-        <td><%= restaurant.address %></td>
-        <td><%= restaurant.phone_number %></td>
-        <td><%= restaurant.category %></td>
-        <td><%= link_to 'Show', restaurant %></td>
-        <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
-        <td><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <p>Address: <%= restaurant.address %></p>
+  </div>
+<% end %>
 
-<br>
-
-<%= link_to 'New Restaurant', new_restaurant_path %>

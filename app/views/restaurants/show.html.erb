@@ -1,38 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex justify-content-between align-items-center"> <%# Name & edit icon %>
+  <h1><%= @restaurant.name %></h1>
+  <h5><%= link_to edit_restaurant_path(@restaurant.id) do %> <i class="fas fa-pencil-alt m-2"></i> <% end %></h5>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
-</p>
+<div class="card p-3 mb-2">
+  <p><strong>Address:</strong> <%= @restaurant.address %></p>
+  <p><strong>Phone:</strong> <%= @restaurant.phone_number %></p>
+  <p><strong>Category:</strong> <%= @restaurant.category %></p>
+</div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @restaurant.phone_number %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @restaurant.category %>
-</p>
-
-<!-- NEW -->
+<!-- Reviews!!! -->
 <ul class="list-group">
+  <div class="d-flex justify-content-between"> <%# Reviews & Add review %>
+    <h4>Reviews</h4>
+    <%= link_to 'Leave a review', new_restaurant_review_path(@restaurant.id) %>
+    <%# new_restaurant_review   GET   /restaurants/:restaurant_id/reviews/new %> <%# SEE RAKE ROUTES!!!!!! %>
+    <%# path got /:restaurant_id <- need to send @restaurant.id as argument %>
+  </div>
+
   <% @restaurant.reviews.each do |review| %>
-    <li class="list-group-item"><%= review.content %> (<%= review.rating %> stars)</li>
-    <li class="list-group-item"><%= link_to "Remove", review_path(review.id), method: :delete, data: { confirm: "Are you sure?" } %></li>
-    <%# review_path(review) also ok %>
+    <li class="list-group-item d-flex justify-content-between"> <%# Content & delete icon %>
+      <%= review.content %> (<%= review.rating %> stars)
+      <%= link_to review_path(review.id), method: :delete, data: { confirm: "Are you sure to delete this review?" } do %>
+      <%# review DELETE /reviews/:id %>  <%# path got /:id <- need to send review.id %> <%# SEE RAKE ROUTES!!!!!! %>
+        <i class="far fa-trash-alt"></i>
+      <% end %>
+    </li>
   <% end %>
 </ul>
 
-
-
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', restaurants_path %> |
-
-<!-- NEW -->
-<%= link_to 'Leave a review', new_restaurant_review_path(@restaurant) %>

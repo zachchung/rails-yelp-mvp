@@ -1,7 +1,10 @@
 class ReviewsController < ApplicationController
   def new
-    # we need @restaurant in our `simple_form_for`
+    # /restaurant/4/reviews/new
+    # /restaurant/:restaurant_id/reviews/new
+    # params = { restaurant_id: 4 }
     @restaurant = Restaurant.find(params[:restaurant_id])
+    # we need @restaurant in our `simple_form_for`
     @review = Review.new
   end
 
@@ -15,7 +18,8 @@ class ReviewsController < ApplicationController
       redirect_to restaurant_path(@restaurant)
       # redirect_to @restaurant # also works
     else
-      render :new # ???? new.html.erb?/ controller#new
+      render :new # go to new.html.erb (ie. show form again)
+      # simple form show error msg becoz of render :new
     end
   end
 
